@@ -7,11 +7,15 @@ buildscript {
 apply plugin: 'com.android.application'
 
 dependencies {
-    implementation files('libs/Android_Map3D_SDK_V9.0.0_20220113.jar')
-    compile fileTree(include: '*.jar', dir: 'libs')
+//    implementation files('libs/Android_Map3D_SDK_V9.0.0_20220113.jar')
+//    compile fileTree(include: '*.jar', dir: 'libs')
     compile 'com.android.support:recyclerview-v7:26.0.0'
     compile 'com.android.support:support-v4:26.0.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.amap.api:3dmap:latest.integration'
+    compile 'com.amap.api:search:latest.integration'
+//    compile 'com.amap.api:location:latest.integration'
+//    compile 'com.amap.api:map2d:latest.integration'
 }
 
 android {
@@ -42,6 +46,19 @@ android {
         // by a similar customization.
         debug.setRoot('build-types/debug')
         release.setRoot('build-types/release')
+    }
+    signingConfigs {
+        debug {
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+            storeFile file('debug.keystore')
+            storePassword 'android'
+        }
+    }
+    buildTypes {
+        release {
+            signingConfig signingConfigs.debug
+        }
     }
 }
 
